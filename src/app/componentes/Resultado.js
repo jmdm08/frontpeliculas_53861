@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import '../estilos/resultado.css';
 
 export default function Resultado(props){
@@ -17,18 +19,18 @@ export default function Resultado(props){
         <>
             <div className="dv-pelicula" onClick={handleClick}>
                 <div className="dv-poster">
-                    <img onClick={handleClickPoster} alt="poster" src="https://i1.wp.com/hipertextual.com/wp-content/uploads/2016/10/10346626_260153840835091_3121210337900902159_n1.jpg?resize=600%2C889&ssl=1" />
+                    <img onClick={handleClickPoster} alt="poster" src={props.pelicula.poster} />
                 </div>
                 <div>
-                    <h3>TÍTULO</h3>
+                    <h3>{props.pelicula.titulo}</h3>
                 </div>
                 <div>
-                    <p>SINOPSIS</p>
+                    <p>{props.pelicula.sinopsis}</p>
                 </div>
                 <div>
                     <span>
-                        Rating
-                        <i></i>
+                        <FontAwesomeIcon icon={faStarHalfAlt} />
+                        {props.pelicula.rating}
                     </span>
                 </div>
             </div>
