@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Resultado from "../componentes/Resultado";
 import peliculasDB from "../../peliculas100.json";
 import '../estilos/resultados-busqueda.css';
@@ -8,14 +8,23 @@ export default function ResultadosBusqueda(){
     const [busqueda, setBusqueda] = useState('');
     const [resultado, setResultado] = useState([]);
  
+    /*
+        busquedaAnterior === busqueda
+            -> No ejecuta el efecta
+        busquedaAnterior !== busqueda
+            -> Ejecuta.
+    */
+    useEffect(() => {
+        let resultadosBusqueda = peliculasDB.slice(0, busqueda.length);
+        setResultado(resultadosBusqueda);
+    }, [busqueda]);
+
     function handleSubmit(evento){
         evento.preventDefault();
     }
 
     function handleChange(evento){
         let tituloPelicula = evento.target.value;
-        let resultadosBusqueda = peliculasDB.slice(0, tituloPelicula.length);
-        setResultado(resultadosBusqueda);
         setBusqueda(tituloPelicula);
     }
 
