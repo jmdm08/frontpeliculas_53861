@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Resultado from "../componentes/Resultado";
-import peliculasDB from "../../peliculas100.json";
+import * as PeliculasService from '../servicios/PeliculasService';
 import '../estilos/resultados-busqueda.css';
 
 export default function ResultadosBusqueda(){
@@ -15,8 +15,18 @@ export default function ResultadosBusqueda(){
             -> Ejecuta.
     */
     useEffect(() => {
-        let resultadosBusqueda = peliculasDB.slice(0, busqueda.length);
-        setResultado(resultadosBusqueda);
+        if(busqueda.length >= 3){
+            PeliculasService.servicioBusquedaTitulo(busqueda)
+                .then(function(resultadosBusqueda){
+                    setResultado(resultadosBusqueda.datos);  
+                })
+                .catch(function(error){
+                    console.log(error);
+                })
+        }
+        else{
+            setResultado([]);
+        }
     }, [busqueda]);
 
     function handleSubmit(evento){

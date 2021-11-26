@@ -9,7 +9,7 @@ export default function Resultado(props){
     function handleClick(evento){
         // TODO: Redireccionar al detalle de la película.
         evento.stopPropagation();
-        history.push("/detalle/" + props.pelicula._id.$oid)        
+        history.push("/detalle/" + props.pelicula._id)        
     }
 
     return (
