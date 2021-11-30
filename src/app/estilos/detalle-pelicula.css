@@ -1,0 +1,22 @@
+.dv-detalle_detalle{
+    margin: 20px;
+}
+
+.dv-main_detalle,
+.dv-datos_detalle{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.dv-main_detalle > div{
+    flex-basis: 33%;
+}
+
+.dv-poster_detalle > img {
+    width: 100%;
+    object-fit: contain;
+}
+
+.dv-datos_detalle > * {
+    flex-basis: 25%;  
+}
