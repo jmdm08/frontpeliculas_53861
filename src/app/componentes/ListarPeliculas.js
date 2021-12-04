@@ -14,6 +14,35 @@ export default function ListarPeliculas(){
             });
     }, [])
 
+    function handleClick(evento){
+        const { name, value } = evento.target;
+        const idPelicula = value;
+        switch(name){
+            case 'btnEditar':
+            break;
+
+            case 'btnEliminar':
+                PeliculasService.servicioEliminarPelicula(idPelicula)
+                    .then(function(resultadoEliminar){
+                        if(resultadoEliminar.datos.acknowledged){
+                            alert(resultadoEliminar.mensaje);
+                            /*
+                                1. VALOR ÚNICO.
+                                2. FUNCIÓN QUE RETORNE UN VALOR ÚNICO
+                                    -> RECIBE UN PARÁMETRO -> ESTADO ACTUAL.
+                            */
+                            setPeliculas( peliculas => (
+                                peliculas.filter(pelicula => pelicula._id !== idPelicula)
+                            ));
+                        }
+                        else{
+                            alert(resultadoEliminar.mensaje)
+                        }
+                    })
+            break;
+        }
+    }
+
     return(
         <>
             <table>
@@ -33,7 +62,10 @@ export default function ListarPeliculas(){
                             <td>{pelicula.ano}</td>
                             <td>{pelicula.clasificacion}</td>
                             <td>{pelicula.rating}</td>
-                            <td></td>
+                            <td>
+                                <button type="button" name="btnEditar" value={pelicula._id} onClick={handleClick}>Editar</button>
+                                <button type="button" name="btnEliminar" value={pelicula._id} onClick={handleClick}>Eliminar</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
